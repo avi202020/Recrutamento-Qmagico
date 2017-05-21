@@ -62,7 +62,9 @@ public class OAuth2Configuration {
          .and()
            .authorizeRequests()
            .anyRequest().authenticated()
-           .antMatchers(HttpMethod.OPTIONS, "/**").permitAll();       
+           .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+           .antMatchers(HttpMethod.GET, "/posts/**").permitAll()
+           .antMatchers(HttpMethod.GET, "/topicos/**").permitAll();       
     }
 
   }
