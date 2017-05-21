@@ -85,7 +85,7 @@ public class TopicosController {
   }
   
   @CrossOrigin
-  @GetMapping
+  @RequestMapping(value = "/todos", method = RequestMethod.GET)
   public @ResponseBody ResponseEntity<List<Topico>> findAll() {
     List<Topico> topicos = service.findAll();
     
