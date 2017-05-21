@@ -90,7 +90,7 @@ public class TopicosController {
     List<Topico> topicos = service.findAll();
     
     if(topicos.isEmpty()) {
-      return new ResponseEntity<List<Topico>>(HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<List<Topico>>(HttpStatus.NOT_FOUND);
     }
     
     return ResponseEntity.ok(topicos);
