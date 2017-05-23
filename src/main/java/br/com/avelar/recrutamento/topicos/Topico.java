@@ -92,4 +92,8 @@ public class Topico {
     this.posts = posts;
   }
   
+  public int getPostsNumber() {
+    return posts.size();
+  }
+  
 }
