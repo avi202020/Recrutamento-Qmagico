@@ -17,13 +17,13 @@ import org.springframework.security.acls.domain.BasePermission;
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -72,7 +72,7 @@ public class TopicosController {
   }
   
   @CrossOrigin
-  @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+  @GetMapping("/{id}")
   public @ResponseBody ResponseEntity<Topico> findOne(@PathVariable Long id) {
     Topico topico = service.findOne(id);
     
@@ -85,16 +85,9 @@ public class TopicosController {
   }
   
   @CrossOrigin
-  @RequestMapping(value = "/todos", method = RequestMethod.GET)
-  public @ResponseBody ResponseEntity<List<Topico>> findAll() {
-    List<Topico> topicos = service.findAll();
-    
-    if(topicos.isEmpty()) {
-      return new ResponseEntity<List<Topico>>(HttpStatus.NOT_FOUND);
-    }
-    
-    return ResponseEntity.ok(topicos);
-    
+  @GetMapping("/todos")
+  public @ResponseBody List<Topico>findAll() {
+    return service.findAll(); 
   }
   
   @CrossOrigin
@@ -116,7 +109,7 @@ public class TopicosController {
   }
   
   @CrossOrigin
-  @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+  @DeleteMapping("/{id}")
   @PreAuthorize("hasPermission(#id, 'br.com.avelar.recrutamento.topicos.Topico', 'delete')")
   public ResponseEntity<Void> delete(@PathVariable Long id) {
     if(!service.exists(id)) {
