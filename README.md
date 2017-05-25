@@ -1,6 +1,6 @@
 # Recrutamento-Qmagico
 
-Projeto de um fórum com Spring boot e Angular
+Projeto de um fórum com Spring boot e Angular. https://recrutamento-qmagico.herokuapp.com
 
 ## 1 Build
 
