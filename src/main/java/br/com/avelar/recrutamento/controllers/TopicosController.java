@@ -4,7 +4,6 @@ import br.com.avelar.recrutamento.acl.ACLPermissions;
 import br.com.avelar.recrutamento.topicos.Topico;
 import br.com.avelar.recrutamento.topicos.TopicosService;
 import br.com.avelar.recrutamento.user.UserService;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.List;
@@ -46,28 +45,21 @@ public class TopicosController {
   
   @CrossOrigin
   @PostMapping
-  public @ResponseBody ResponseEntity<Void> save(@Valid @RequestBody Topico topico,
+  public @ResponseBody ResponseEntity<String> save(@Valid @RequestBody Topico topico,
                                                                      Errors errors,
                                                                     Authentication authentication) 
                                                                          throws URISyntaxException {
     
     if(errors.hasErrors()) {
-      return ResponseEntity.badRequest().build();
+      return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
     }
-    
-    if(topico.getId() != null && service.exists(topico.getId())) {
-      return ResponseEntity
-                .status(HttpStatus.CONFLICT)
-                .header("Location", "/topicos/" + topico.getId())
-                .build();
-    }
-    
+        
     topico.setData(new Date());
     topico.setAutor(userService.find(authentication.getName())); //Pega o usuário autenticado
     service.save(topico);
     acl.add(authentication, topico, BasePermission.WRITE, BasePermission.DELETE);
     
-    return ResponseEntity.created(new URI("/topicos/" + topico.getId())).build();
+    return ResponseEntity.ok(topico.getId().toString());
     
   }
   
