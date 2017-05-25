@@ -84,7 +84,7 @@ public class TopicosController {
   
   @CrossOrigin
   @PutMapping
-  @PreAuthorize("hasPermission(#topico.id, 'br.com.avelar.recrutamento.topicos.Topico', 'write')")
+  @PreAuthorize("hasPermission(#topico.id, 'br.com.avelar.recrutamento.topicos.Topico', 'write')  or hasRole('ADMIN')")
   public ResponseEntity<Void> edit(@Valid @RequestBody Topico topico,
                                                        Errors errors,
                                                        Authentication authentication) 
@@ -102,7 +102,7 @@ public class TopicosController {
   
   @CrossOrigin
   @DeleteMapping("/{id}")
-  @PreAuthorize("hasPermission(#id, 'br.com.avelar.recrutamento.topicos.Topico', 'delete')")
+  @PreAuthorize("hasPermission(#id, 'br.com.avelar.recrutamento.topicos.Topico', 'delete')  or hasRole('ADMIN')")
   public ResponseEntity<Void> delete(@PathVariable Long id) {
     if(!service.exists(id)) {
       return ResponseEntity.notFound().build();

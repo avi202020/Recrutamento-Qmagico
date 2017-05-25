@@ -104,7 +104,7 @@ public class PostsController {
   
   @CrossOrigin
   @PutMapping
-  @PreAuthorize("hasPermission(#post.id, 'br.com.avelar.recrutamento.posts.Post', 'write')")
+  @PreAuthorize("hasPermission(#post.id, 'br.com.avelar.recrutamento.posts.Post', 'write') or hasRole('ADMIN')")
   public ResponseEntity<Void> edit(@Valid @RequestBody Post post,
                                                        Errors errors,
                                                        Authentication authentication) 
@@ -122,7 +122,7 @@ public class PostsController {
   
   @CrossOrigin
   @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-  @PreAuthorize("hasPermission(#id, 'br.com.avelar.recrutamento.posts.Post', 'delete')")
+  @PreAuthorize("hasPermission(#id, 'br.com.avelar.recrutamento.posts.Post', 'write')  or hasRole('ADMIN')")
   public ResponseEntity<Void> delete(@PathVariable Long id) {
     if(!service.exists(id)) {
       return ResponseEntity.notFound().build();
