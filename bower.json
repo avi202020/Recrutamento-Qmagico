@@ -1,0 +1,25 @@
+{
+  "name": "recrutamento-qmagico-front",
+  "homepage": "https://gitlab.com/geovannyAvelar/Recrutamento-Qmagico",
+  "authors": [
+    "Geovanny Avelar <geovanny.avelar@gmail.com"
+  ],
+  "main": "index.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "materialize": ">=0.98.1",
+    "jquery": ">=1.7.1",
+    "moment": ">=2.5.0",
+    "angular": ">=1.6.4",
+    "angular-route": ">=1.6.2",
+    "angular-cookies": ">=1.6.2"
+  }
+}

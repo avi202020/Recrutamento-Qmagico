@@ -40,7 +40,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     web.ignoring()
       .antMatchers("/favicon.ico")
       .antMatchers(HttpMethod.GET, "/topicos/**")
-      .antMatchers(HttpMethod.GET, "/posts/**");
+      .antMatchers(HttpMethod.GET, "/posts/**")
+      .antMatchers(HttpMethod.GET, "/**");
   }
 
   @Override
