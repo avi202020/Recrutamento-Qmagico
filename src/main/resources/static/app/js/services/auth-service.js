@@ -14,6 +14,7 @@ app.service('AuthService', function($http, Session, BASE_URL) {
       authService
         .getUser(token)
           .then(function success(u) {
+            console.log(u);
             var isAdmin = u.authorities[0] == 'ADMIN';
             var session = {"username": u["username"], "token": token, 
                            "avatar": u["avatar"], 'admin': isAdmin};
@@ -29,11 +30,12 @@ app.service('AuthService', function($http, Session, BASE_URL) {
 
   authService.getUser = function (token) {
     return $http({
-        method: "GET",
+        method: "POST",
         url: BASE_URL + "users",
         headers: {"Authorization": "Bearer " + token}
       })
       .then(function success(response) {
+        console.log(response);
         return response['data'];
       }, function error(data) {
         return {};

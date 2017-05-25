@@ -4,8 +4,6 @@ import br.com.avelar.recrutamento.user.User;
 import br.com.avelar.recrutamento.user.UserService;
 import java.security.Principal;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,9 +22,9 @@ public class UsersController {
   }
  
   @CrossOrigin
-  @RequestMapping(method = RequestMethod.GET)
+  @RequestMapping(method = RequestMethod.POST)
   @PreAuthorize("isAuthenticated()")
-  public @ResponseBody ResponseEntity<User> getUser(Principal principal) {
+  public @ResponseBody User getUser(Principal principal) {
     User user = null;
     String name = principal.getName();
     
@@ -36,6 +34,6 @@ public class UsersController {
       user = service.find(name);
     }
     
-    return new ResponseEntity<User>(user, HttpStatus.OK);
+    return user;
   }
 }
