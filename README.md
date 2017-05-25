@@ -21,7 +21,7 @@ Projeto de um fórum com Spring boot e Angular
 
 3. Entre no MySQL.
 
-4. Crie uma base de dados chamada **recrutamento**:
+4. Crie uma base de dados chamada recrutamento:
 **create database recrutamento;**
 
 5. Rode o SQL para a geração das tabelas:
@@ -30,5 +30,6 @@ Projeto de um fórum com Spring boot e Angular
 6. Rode o projeto com:
 **mvn spring-boot:run**
 
-Foi criado um usuário com username root e senha root.
+Foi criado um usuário com username root e senha root. Para acessar a aplicação entre 
+em http://localhost:8080.
 
