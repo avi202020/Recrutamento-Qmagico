@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#212121" />
+    <title>Recrutamento QMágico</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="assets/components/css/materialize.min.css" />
+    <link rel="stylesheet" href="app/css/main.css" />
+    <script type="text/javascript" src="app/js/recrutamento.min.js"></script>
+  </head>
+
+  <body ng-app="recrutamento" ng-controller="loginController">
+
+    <nav>
+      <div class="nav-wrapper grey darken-4">
+        <a href="#" class="brand-logo"></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+        </ul>
+      </div>
+    </nav>
+
+    <div class="row" ng-show="isAuthenticated()">
+      <div class="col s12 m3">
+        <div class="card clearfix">
+          <div>
+            <p class="col s4">
+              <img ng-src="{{getAvatar()}}" class="circle responsive-img">
+            </p>
+
+            <p class="col s1 black-text">
+              <p>{{'Logado como ' + getUsername()}}</p>
+            </p>
+
+            <p class="col s1">
+              <p><a href="" ng-click="logout()">Sair</a></p>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" ng-hide="isAuthenticated()">
+      <form name="loginForm" ng-submit="login()" class="col s12 m6" ng-hide="loading">
+
+        <div class="row">
+          <div class="col s12 m6">
+            <span ng-bind="error" class="red-text"></span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12 m3">
+            <input type="text" name="username" ng-model="credential.username" required>
+            <label for="username">
+              Usuário
+            </label>
+          </div>
+
+          <div class="input-field col s12 m3">
+            <input type="password" name="password" ng-model="credential.password" maxlength="16" required>
+            <label for="password">
+              Senha
+            </label>
+          </div>
+
+          <div class="input-field col s12 m3" ng-hide="loading">
+            <button type="submit" ng-disabled="loginForm.$invalid" class="btn waves-effect waves-light green">
+              Entrar
+            </button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- SPINNER -->
+    <div class="row">
+      <div class="col s12">
+        <div ng-show="loading" class="preloader-wrapper active">
+          <div class="spinner-layer spinner-blue">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+
+          <div class="spinner-layer spinner-red">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+
+          <div class="spinner-layer spinner-yellow">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+
+          <div class="spinner-layer spinner-green">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section ng-view></section>
+
+  </body>
+
+</html>

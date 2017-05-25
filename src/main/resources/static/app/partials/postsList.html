@@ -1,0 +1,55 @@
+<a href="#!">Voltar</a>
+
+<div class="row">
+  <h5>{{topic.titulo}}</h5>
+
+  <ul class="collection">
+    <li class="collection-item avatar" ng-repeat="post in posts">
+      <img ng-src="{{post.autor.avatar}}" alt="" class="circle">
+      <span class="title">{{post.autor.username + " disse " + post.data + ":"}}</span>
+      <p>{{post.conteudo}}</p>
+
+      <a href="" class="secondary-content" data-target="deletePostModal" ng-click="selectPost(post.id)" ng-show="post.autor.username === getUsername() || isAdmin()">
+        <i class="material-icons deleteButton">delete_forever</i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<form id="postForm" name="postForm" ng-submit="save()" class="col s12 m8 offset-s2">
+
+  <div class="row">
+    <p class="input-field col s12 m10 offset-m1">
+      <textarea ng-model="post.conteudo" id="content" 
+                name="content" class="materialize-textarea validate" 
+                length="1000" maxlength="1000" required>
+      </textarea>
+      <label for="content" data-success="OK" data-error="Conteúdo inválido. Não pode ser vazio ou menor que 1000">
+          Responder
+      </label>
+    </p>
+  </div>
+
+  <div class="row">
+    <p class="input-field col s12 m10 offset-m1">
+      <button type="submit" ng-disabled="topicForm.$invalid || saving" class="btn waves-effect waves-light green">
+          <i class="material-icons right">send</i> Postar
+      </button>
+    </p>
+  </div>
+</form>
+
+<div id="deletePostModal" class="modal">
+  <div class="modal-content">
+    <h4>Apagar o post?</h4>
+    <p>Esse post será apagado permanentemente</p>
+  </div>
+  <div class="modal-footer">
+    <a ng-click="delete()" class="modal-action modal-close waves-effect waves-green btn-flat">
+      Apagar
+    </a>
+    <a class="modal-action modal-close waves-effect waves-red btn-flat">
+      Cancelar
+    </a>
+  </div>
+</div>

@@ -1,0 +1,138 @@
+
+<div class="row">
+  <div class="col s12 m3">
+    <a class="waves-effect waves-light btn green" 
+       ng-show="isAuthenticated()" data-target="newTopicModal">
+        Novo tópico
+    </a>
+  </div> 
+</div>
+
+<!-- SPINNER -->
+<div ng-show="loading">
+  <div class="preloader-wrapper big active" >
+    <div class="spinner-layer spinner-blue">
+      <div class="circle-clipper left">
+        <div class="circle"></div>
+      </div>
+      <div class="gap-patch">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-clipper right">
+        <div class="circle"></div>
+      </div>
+    </div>
+
+    <div class="spinner-layer spinner-red">
+      <div class="circle-clipper left">
+        <div class="circle"></div>
+      </div>
+      <div class="gap-patch">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-clipper right">
+        <div class="circle"></div>
+      </div>
+    </div>
+
+    <div class="spinner-layer spinner-yellow">
+      <div class="circle-clipper left">
+        <div class="circle"></div>
+      </div>
+      <div class="gap-patch">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-clipper right">
+        <div class="circle"></div>
+      </div>
+    </div>
+
+    <div class="spinner-layer spinner-green">
+      <div class="circle-clipper left">
+        <div class="circle"></div>
+      </div>
+      <div class="gap-patch">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-clipper right">
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" ng-show="topics.length > 0">
+  <ul class="collection col s12">
+    <li class="collection-item avatar" ng-repeat="topic in topics">
+      <span class="title"><a ng-href="{{'/#!/topic/' + topic.id}}">{{topic.titulo}}</a></span>
+      <p>{{topic.data}} <br> {{topic.postsNumber}} post(s)
+      </p>
+      <a href="" class="secondary-content" data-target="deleteTopicModal"
+         ng-click="selectTopic(topic.id)" 
+         ng-show="topic.autor.username === getUsername() || isAdmin()">
+        <i class="material-icons deleteButton" >delete_forever</i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div id="deleteTopicModal" class="modal">
+  <div class="modal-content">
+    <h4>Apagar o tópico?</h4>
+    <p>Esse tópico será apagado permanentemente</p>
+  </div>
+  <div class="modal-footer">
+    <a ng-click="delete()" class="modal-action modal-close waves-effect waves-green btn-flat">
+      Apagar
+    </a>
+    <a class="modal-action modal-close waves-effect waves-red btn-flat">
+      Cancelar
+    </a>
+  </div>
+</div>
+
+<div id="newTopicModal" class="modal">
+  <form id="topicForm" name="topicForm" 
+        ng-submit="save()" class="col s12 m8 offset-m2 modal-content">
+
+    <h5>Novo tópico</h5>
+
+    <div class="row">
+      <div class="col s12">
+        <span ng-bind="error" class="red-text"></span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <input type="text" name="title" class="validate"
+               ng-model="topicDraft.title" minlength="5" 
+               length="50" maxlength="50" required>
+        <label for="title" data-success="OK" 
+               data-error="Título inválido. Precisa ser maior que três e menor que 50">
+          Título
+        </label>
+      </div>
+    </div>
+
+    <div class="row">
+      <p class="input-field col s12">
+        <textarea ng-model="topicDraft.content" id="content" name="content" 
+                  class="materialize-textarea validate" minlength="5" 
+                  length="1000" maxlength="1000" required>
+        </textarea>
+        <label for="content" data-success="OK" 
+               data-error="Conteúdo inválido. Precisa ser maior que cinco e menor que 1000">
+          Conteúdo
+        </label>
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button type="submit" ng-disabled="topicForm.$invalid || saving" 
+              class="btn waves-effect waves-light green">
+        <i class="material-icons right">send</i> Postar
+      </button>
+    </div>
+  </form>
+</div>
