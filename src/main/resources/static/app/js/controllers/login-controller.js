@@ -34,7 +34,7 @@ app.controller("loginController", function($scope, $cookies, $location, AuthServ
     AuthService
       .logout()
         .then(function success() {
-          AuthService.logout();
+          Materialize.toast('Logout feito com sucesso!', 3000);
         });
   };
  

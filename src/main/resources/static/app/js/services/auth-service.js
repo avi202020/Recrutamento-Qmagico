@@ -79,7 +79,7 @@ app.service('AuthService', function($http, Session, BASE_URL) {
  
   authService.logout = function() {
     return $http({
-      method: "GET",
+      method: "POST",
       url: BASE_URL + "oauth/logout",
     }).then(function success() {
       Session.destroy();
